@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Réservation — Les Zimoristix</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-wrap">
+    <a href="index.html" class="logo">
+      <span class="pennant"></span>
+      <span>LES ZIMORISTIX<small>Club des jeunes · Longchamps</small></span>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="sponsors.html">Nos Sponsors</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="evenements.html">Événements</a></li>
+        <li><a href="reservation.html" class="active">Réservation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding-bottom:0;">
+  <div class="hero-inner" style="padding-bottom:50px;">
+    <span class="accent">Réservez votre place</span>
+    <h1 style="font-size:clamp(2rem,6vw,3.2rem);">Pré-réservation</h1>
+    <p class="sub">Remplissez le formulaire pour réserver votre place à l'un de nos événements. Simple et rapide !</p>
+  </div>
+  <div class="bunting on-rouge"></div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="form-box">
+      <div class="notice">
+        🚧 La réservation en ligne n'est pas encore active. Ce formulaire est une démonstration — contactez-nous directement à <strong>leszimoristix@example.com</strong> pour réserver votre place en attendant !
+      </div>
+
+      <form id="reservationForm">
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Votre nom">
+          </div>
+          <div class="form-row">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" placeholder="Votre prénom">
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="vous@exemple.com">
+          </div>
+          <div class="form-row">
+            <label for="telephone">Téléphone</label>
+            <input type="tel" id="telephone" placeholder="+32 ...">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="evenement">Événement</label>
+          <select id="evenement">
+            <option>Soirée d'été au village — 22 août 2026</option>
+            <option>Tournoi des jeux inter-quartiers — 6 septembre 2026</option>
+            <option>Barbecue annuel — 3 octobre 2026</option>
+            <option>Marché de Noël du village — 12 décembre 2026</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="places">Nombre de places</label>
+          <input type="number" id="places" min="1" value="1">
+        </div>
+
+        <div class="form-row">
+          <label for="message">Message (facultatif)</label>
+          <textarea id="message" rows="3" placeholder="Une info à nous transmettre ?"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-rouge" style="width:100%;">Envoyer ma pré-réservation</button>
+      </form>
+
+      <div id="confirmMsg">✅ Merci ! Votre demande a bien été notée (démo — fonctionnalité bientôt disponible).</div>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="container">
+    <h2>Une question avant de réserver ?</h2>
+    <p>N'hésitez pas à nous contacter, on répond toujours avec plaisir !</p>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Les Zimoristix</h4>
+        <p>Le club des jeunes de Longchamps, Belgique. On anime le village, une soirée à la fois.</p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="Email">@</a>
+        </div>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Accueil</a></li>
+          <li><a href="sponsors.html">Nos Sponsors</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="evenements.html">Événements</a></li>
+          <li><a href="reservation.html">Réservation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Longchamps, Belgique</li>
+          <li>leszimoristix@example.com</li>
+          <li>+32 4XX XX XX XX</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Les Zimoristix — Club des jeunes de Longchamps.
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('reservationForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('confirmMsg').style.display = 'block';
+    document.getElementById('confirmMsg').scrollIntoView({behavior:'smooth', block:'center'});
+  });
+</script>
+
+</body>
+</html>
