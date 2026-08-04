@@ -616,6 +616,21 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
   100%{ background: #E8283F; }
 }
 
+.fete-content{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+@keyframes feteShake{
+  0%{   transform: translate(0,0) rotate(0deg); }
+  20%{  transform: translate(-14px, 8px) rotate(-1.2deg); }
+  40%{  transform: translate(12px, -10px) rotate(1.4deg); }
+  60%{  transform: translate(-9px, -6px) rotate(-1deg); }
+  80%{  transform: translate(13px, 7px) rotate(1.1deg); }
+  100%{ transform: translate(0,0) rotate(0deg); }
+}
+.fete-content.fete-shake{ animation: feteShake 0.3s infinite; }
+
 .fete-logo{
   position: absolute;
   top: 50%;
