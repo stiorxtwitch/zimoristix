@@ -366,6 +366,39 @@ nav a.active{
 }
 .event-meta span{ margin-right: 16px; }
 
+/* Événement passé : grisé et non cliquable */
+.past-badge{
+  display:none;
+  margin-left: 10px;
+  background: var(--encre-douce);
+  color: var(--blanc-casse);
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  vertical-align: middle;
+}
+.event-card.past-event{
+  opacity: 0.55;
+  filter: grayscale(65%);
+}
+.event-card.past-event .past-badge{ display: inline-block; }
+.event-card.past-event .btn.disabled{
+  background: #bbb;
+  color: #f2f2f2;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Options passées, désactivées dans le formulaire de réservation */
+.form-row select option:disabled{
+  color: #a89a9a;
+  font-style: italic;
+}
+
 /* ---------- Sponsors ---------- */
 .sponsor-card{ text-align:center; }
 .sponsor-card img{ height: 160px; object-fit: cover; }
