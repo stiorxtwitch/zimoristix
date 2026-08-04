@@ -133,15 +133,15 @@ document.addEventListener('DOMContentLoaded', function () {
       // Musique à partir de 1min30 (=90s)
       feteVideo.src = 'https://www.youtube.com/embed/xXT0UnNc4gI?start=90&autoplay=1&rel=0';
 
-      // Phase 1 (0-10s) : flashs doux et lents
-      setFlash(2.6, 0.4);
+      // Phase 1 (0-10s) : flashs doux et lents (mais bien colorés, pas gris)
+      setFlash(2.6, 0.9);
       setLogoSpeed(7, 2.6);
       setConfettiRate(380, false);
       for (var i = 0; i < 12; i++) { setTimeout(function () { spawnConfetti(false); }, i * 90); }
 
       // Phase 2 (10-16s) : ça accélère
       phaseTimers.push(setTimeout(function () {
-        setFlash(0.7, 0.85);
+        setFlash(0.7, 0.95);
         setLogoSpeed(2.4, 1);
         setConfettiRate(110, false);
         boomInterval = setInterval(triggerBoom, 900);

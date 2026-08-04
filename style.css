@@ -626,7 +626,7 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
   36%{  background: #2EC4FF; }
   48%{  background: #FFFFFF; }
   60%{  background: #B6FF2E; }
-  72%{  background: #7A0C17; }
+  72%{  background: #FF6A00; }
   84%{  background: #F4B740; }
   100%{ background: #E8283F; }
 }
@@ -690,8 +690,8 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
   animation-fill-mode: forwards;
 }
 @keyframes feteFly{
-  from{ transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
-  to{ transform: translateY(115vh) translateX(var(--drift, 40px)) rotate(var(--spin, 540deg)); opacity: 0.15; }
+  from{ transform: translateY(0) translateX(-50%) rotate(0deg); opacity: 1; }
+  to{ transform: translateY(115vh) translateX(calc(-50% + var(--drift, 40px))) rotate(var(--spin, 540deg)); opacity: 0.15; }
 }
 
 .fete-video{
