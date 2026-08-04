@@ -70,4 +70,61 @@ document.addEventListener('DOMContentLoaded', function () {
       firstAvailable.selected = true;
     }
   }
+
+  // "LANCER LA FÊTE" (page d'accueil uniquement)
+  var feteBtn = document.getElementById('feteBtn');
+  var feteOverlay = document.getElementById('feteOverlay');
+  if (feteBtn && feteOverlay) {
+    var feteVideo = document.getElementById('feteVideo');
+    var feteStopBtn = document.getElementById('feteStopBtn');
+    var confettiLayer = document.getElementById('feteConfettiLayer');
+    var confettiItems = ['🎉', '🎊', '🥳', '✨', '🍻', '🎶', '🔥', 'LES ZIMORISTIX', '🎈'];
+    var confettiInterval = null;
+    var feteTimeout = null;
+    var feteRunning = false;
+
+    function spawnConfetti() {
+      var piece = document.createElement('span');
+      piece.className = 'fete-piece';
+      piece.textContent = confettiItems[Math.floor(Math.random() * confettiItems.length)];
+      var size = 16 + Math.random() * 26;
+      var left = Math.random() * 100;
+      var duration = 2.5 + Math.random() * 2.5;
+      var drift = (Math.random() * 220 - 110) + 'px';
+      var spin = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540) + 'deg';
+      piece.style.left = left + 'vw';
+      piece.style.fontSize = size + 'px';
+      piece.style.setProperty('--drift', drift);
+      piece.style.setProperty('--spin', spin);
+      piece.style.animationDuration = duration + 's';
+      confettiLayer.appendChild(piece);
+      setTimeout(function () { piece.remove(); }, duration * 1000 + 200);
+    }
+
+    function startFete() {
+      if (feteRunning) return;
+      feteRunning = true;
+      feteOverlay.classList.add('active');
+      // Musique à partir de 1min30 (=90s)
+      feteVideo.src = 'https://www.youtube.com/embed/xXT0UnNc4gI?start=90&autoplay=1&rel=0';
+      // Rafale de confettis en continu
+      confettiInterval = setInterval(spawnConfetti, 90);
+      for (var i = 0; i < 25; i++) { setTimeout(spawnConfetti, i * 40); }
+      // Arrêt automatique après 2 minutes
+      feteTimeout = setTimeout(stopFete, 120000);
+    }
+
+    function stopFete() {
+      if (!feteRunning) return;
+      feteRunning = false;
+      feteOverlay.classList.remove('active');
+      feteVideo.src = '';
+      clearInterval(confettiInterval);
+      clearTimeout(feteTimeout);
+      confettiLayer.innerHTML = '';
+    }
+
+    feteBtn.addEventListener('click', startFete);
+    feteStopBtn.addEventListener('click', stopFete);
+  }
 });
