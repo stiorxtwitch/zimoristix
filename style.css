@@ -86,8 +86,9 @@ header{
 }
 .logo-badge{
   background: var(--rouge);
-  border-radius: 10px;
-  padding: 6px 9px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -95,9 +96,11 @@ header{
   box-shadow: 0 2px 8px var(--ombre);
 }
 .logo-badge img{
-  height: 30px;
-  width:auto;
+  height: 26px;
+  width: auto;
+  max-width: 30px;
   display:block;
+  object-fit: contain;
 }
 .logo small{
   display:block;
