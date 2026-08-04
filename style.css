@@ -598,38 +598,60 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
   background: #10090b;
 }
 .fete-overlay.active{ display: block; }
+@keyframes feteShake{
+  0%{   transform: translate(0,0) rotate(0deg); }
+  20%{  transform: translate(-16px, 10px) rotate(-1.4deg); }
+  40%{  transform: translate(15px, -13px) rotate(1.6deg); }
+  60%{  transform: translate(-12px, -8px) rotate(-1.2deg); }
+  80%{  transform: translate(16px, 9px) rotate(1.3deg); }
+  100%{ transform: translate(0,0) rotate(0deg); }
+}
+.fete-overlay.fete-shake{ animation: feteShake 0.28s infinite; }
 
+/* Fond agrandi (dépasse l'écran) pour que le tremblement ne révèle jamais de bord */
 .fete-flash{
   position: absolute;
-  inset: 0;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
   animation: feteFlash 1.6s steps(1, end) infinite;
   opacity: 0.9;
+  z-index: 0;
 }
 @keyframes feteFlash{
   0%{   background: #C8102E; }
-  14%{  background: #F4B740; }
-  28%{  background: #E8283F; }
-  42%{  background: #FFFFFF; }
-  57%{  background: #7A0C17; }
-  71%{  background: #F4B740; }
-  85%{  background: #C8102E; }
+  12%{  background: #FF2E9A; }
+  24%{  background: #F4B740; }
+  36%{  background: #2EC4FF; }
+  48%{  background: #FFFFFF; }
+  60%{  background: #B6FF2E; }
+  72%{  background: #7A0C17; }
+  84%{  background: #F4B740; }
   100%{ background: #E8283F; }
 }
 
-.fete-content{
+/* Onde de choc "boom" qui explose depuis le centre */
+.fete-burst{
   position: absolute;
-  inset: 0;
-  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.35) 35%, rgba(255,255,255,0) 70%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
 }
-@keyframes feteShake{
-  0%{   transform: translate(0,0) rotate(0deg); }
-  20%{  transform: translate(-14px, 8px) rotate(-1.2deg); }
-  40%{  transform: translate(12px, -10px) rotate(1.4deg); }
-  60%{  transform: translate(-9px, -6px) rotate(-1deg); }
-  80%{  transform: translate(13px, 7px) rotate(1.1deg); }
-  100%{ transform: translate(0,0) rotate(0deg); }
+.fete-burst.boom{
+  animation: feteBoom 0.4s ease-out;
 }
-.fete-content.fete-shake{ animation: feteShake 0.3s infinite; }
+@keyframes feteBoom{
+  0%{   width: 10px; height: 10px; opacity: 0.95; }
+  100%{ width: 150vmax; height: 150vmax; opacity: 0; }
+}
 
 .fete-logo{
   position: absolute;
@@ -639,7 +661,7 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
   transform: translate(-50%, -50%);
   filter: drop-shadow(0 0 30px rgba(255,255,255,0.75));
   animation: feteSpin 4s linear infinite, fetePulse 1.1s ease-in-out infinite alternate;
-  z-index: 2;
+  z-index: 3;
 }
 @keyframes feteSpin{
   from{ transform: translate(-50%, -50%) rotate(0deg); }
@@ -647,13 +669,13 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
 }
 @keyframes fetePulse{
   from{ filter: drop-shadow(0 0 20px rgba(255,255,255,0.6)) brightness(1); }
-  to{ filter: drop-shadow(0 0 55px rgba(255,255,255,0.95)) brightness(1.15); }
+  to{ filter: drop-shadow(0 0 65px rgba(255,255,255,1)) brightness(1.3); }
 }
 
 .fete-confetti-layer{
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 2;
   pointer-events: none;
 }
 .fete-piece{
@@ -684,7 +706,7 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 3;
+  z-index: 4;
   background: rgba(0,0,0,0.55);
   color: var(--blanc);
   border: 2px solid var(--blanc);
@@ -696,5 +718,6 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
 .fete-stop:hover{ background: rgba(0,0,0,0.75); }
 
 @media (prefers-reduced-motion: reduce){
-  .fete-flash, .fete-logo{ animation: none !important; background: var(--rouge) !important; }
+  .fete-flash, .fete-logo, .fete-burst, .fete-overlay.fete-shake{ animation: none !important; }
+  .fete-flash{ background: var(--rouge) !important; }
 }
