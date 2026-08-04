@@ -676,6 +676,7 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
   position: absolute;
   inset: 0;
   z-index: 2;
+  overflow: hidden;
   pointer-events: none;
 }
 .fete-piece{

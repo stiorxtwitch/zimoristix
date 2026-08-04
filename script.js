@@ -91,11 +91,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function spawnConfetti(chaos) {
       var piece = document.createElement('span');
       piece.className = 'fete-piece';
-      piece.textContent = confettiItems[Math.floor(Math.random() * confettiItems.length)];
-      var size = 16 + Math.random() * (chaos ? 36 : 26);
-      var left = Math.random() * 100;
+      var text = confettiItems[Math.floor(Math.random() * confettiItems.length)];
+      var isLongText = text.length > 3;
+      piece.textContent = text;
+      var size = isLongText
+        ? (14 + Math.random() * (chaos ? 10 : 8))
+        : (16 + Math.random() * (chaos ? 30 : 22));
+      // Marge de sécurité plus grande pour le texte long, pour qu'il ne dépasse jamais de l'écran
+      var margin = isLongText ? 22 : 8;
+      var left = margin + Math.random() * (100 - margin * 2);
       var duration = (chaos ? 1.4 : 2.5) + Math.random() * (chaos ? 1.6 : 2.5);
-      var range = chaos ? 420 : 220;
+      var range = (isLongText ? 0.5 : 1) * (chaos ? 280 : 150);
       var drift = (Math.random() * range - range / 2) + 'px';
       var spin = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * (chaos ? 900 : 540)) + 'deg';
       piece.style.left = left + 'vw';
@@ -134,14 +140,14 @@ document.addEventListener('DOMContentLoaded', function () {
       feteVideo.src = 'https://www.youtube.com/embed/xXT0UnNc4gI?start=90&autoplay=1&rel=0';
 
       // Phase 1 (0-10s) : flashs doux et lents (mais bien colorés, pas gris)
-      setFlash(2.6, 0.9);
+      setFlash(2.6, 1);
       setLogoSpeed(7, 2.6);
       setConfettiRate(380, false);
       for (var i = 0; i < 12; i++) { setTimeout(function () { spawnConfetti(false); }, i * 90); }
 
       // Phase 2 (10-16s) : ça accélère
       phaseTimers.push(setTimeout(function () {
-        setFlash(0.7, 0.95);
+        setFlash(0.7, 1);
         setLogoSpeed(2.4, 1);
         setConfettiRate(110, false);
         boomInterval = setInterval(triggerBoom, 900);
