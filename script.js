@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(boomInterval);
         boomInterval = setInterval(triggerBoom, 400);
         triggerBoom();
-      }, 50000));
+      }, 35000));
 
       // Arrêt automatique après 2 minutes
       feteTimeout = setTimeout(stopFete, 120000);
