@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
       feteRunning = true;
       feteOverlay.classList.add('active');
       // Musique à partir de 1min30 (=90s)
-      feteVideo.src = 'https://www.youtube.com/embed/xXT0UnNc4gI?start=90&autoplay=1&rel=0';
+      feteVideo.src = 'https://www.image2url.com/r2/default/audio/1785857271766-635b2e1a-d7ae-461a-b760-8e36cb240888.mp3';
 
       // Phase 1 (0-10s) : flashs doux et lents (mais bien colorés, pas gris)
       setFlash(2.6, 1);
