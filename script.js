@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
         setLogoSpeed(2.4, 1);
         setConfettiRate(110, false);
         boomInterval = setInterval(triggerBoom, 900);
-      }, 10000));
+      }, 16000));
 
       // Phase 3 (16s+) : GROSSE BOUM — mode rave, ça part dans tous les sens
       phaseTimers.push(setTimeout(function () {
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(boomInterval);
         boomInterval = setInterval(triggerBoom, 400);
         triggerBoom();
-      }, 16000));
+      }, 30000));
 
       // Arrêt automatique après 2 minutes
       feteTimeout = setTimeout(stopFete, 120000);
