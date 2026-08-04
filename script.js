@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
       piece.textContent = text;
       var size = isLongText
         ? (30 + Math.random() * (chaos ? 10 : 8))
-        : (45 + Math.random() * (chaos ? 30 : 22));
+        : (55 + Math.random() * (chaos ? 30 : 22));
       // Marge de sécurité plus grande pour le texte long, pour qu'il ne dépasse jamais de l'écran
       var margin = isLongText ? 22 : 8;
       var left = margin + Math.random() * (100 - margin * 2);
