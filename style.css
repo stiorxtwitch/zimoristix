@@ -86,19 +86,19 @@ header{
 }
 .logo-badge{
   background: var(--rouge);
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   display:flex;
   align-items:center;
   justify-content:center;
   flex-shrink:0;
-  box-shadow: 0 2px 8px var(--ombre);
+  box-shadow: 0 3px 10px var(--ombre);
 }
 .logo-badge img{
-  height: 48px;
+  height: 70px;
   width: auto;
-  max-width: 54px;
+  max-width: 78px;
   display:block;
   object-fit: contain;
 }
@@ -525,6 +525,12 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
 @media (max-width: 380px){
   .logo small{ display:none; }
   .hero .accent{ font-size: 1.3rem; }
+}
+
+/* Bulle du logo un peu plus compacte sur mobile */
+@media (max-width: 560px){
+  .logo-badge{ width: 68px; height: 68px; }
+  .logo-badge img{ height: 48px; max-width: 54px; }
 }
 
 @media (prefers-reduced-motion: reduce){
