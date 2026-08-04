@@ -569,3 +569,117 @@ section{ padding: clamp(40px, 7vw, 70px) 0; }
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
 }
+
+/* ==================================================
+   LANCER LA FÊTE — bouton + chaos visuel
+   ================================================== */
+.fete-btn{
+  background: linear-gradient(90deg, var(--or), var(--rouge-vif));
+  color: var(--blanc);
+  font-family: 'Anton', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  padding: 16px 36px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  animation: feteBtnPulse 1.6s ease-in-out infinite;
+}
+.fete-btn:hover{ transform: translateY(-2px) scale(1.03); }
+@keyframes feteBtnPulse{
+  0%, 100%{ box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
+  50%{ box-shadow: 0 8px 34px rgba(244,183,64,0.65); }
+}
+
+.fete-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  overflow: hidden;
+  background: #10090b;
+}
+.fete-overlay.active{ display: block; }
+
+.fete-flash{
+  position: absolute;
+  inset: 0;
+  animation: feteFlash 1.6s steps(1, end) infinite;
+  opacity: 0.9;
+}
+@keyframes feteFlash{
+  0%{   background: #C8102E; }
+  14%{  background: #F4B740; }
+  28%{  background: #E8283F; }
+  42%{  background: #FFFFFF; }
+  57%{  background: #7A0C17; }
+  71%{  background: #F4B740; }
+  85%{  background: #C8102E; }
+  100%{ background: #E8283F; }
+}
+
+.fete-logo{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(38vw, 260px);
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 30px rgba(255,255,255,0.75));
+  animation: feteSpin 4s linear infinite, fetePulse 1.1s ease-in-out infinite alternate;
+  z-index: 2;
+}
+@keyframes feteSpin{
+  from{ transform: translate(-50%, -50%) rotate(0deg); }
+  to{ transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes fetePulse{
+  from{ filter: drop-shadow(0 0 20px rgba(255,255,255,0.6)) brightness(1); }
+  to{ filter: drop-shadow(0 0 55px rgba(255,255,255,0.95)) brightness(1.15); }
+}
+
+.fete-confetti-layer{
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.fete-piece{
+  position: absolute;
+  top: -60px;
+  font-weight: 800;
+  white-space: nowrap;
+  color: var(--blanc);
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  animation-name: feteFly;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes feteFly{
+  from{ transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+  to{ transform: translateY(115vh) translateX(var(--drift, 40px)) rotate(var(--spin, 540deg)); opacity: 0.15; }
+}
+
+.fete-video{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fete-stop{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+  background: rgba(0,0,0,0.55);
+  color: var(--blanc);
+  border: 2px solid var(--blanc);
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.fete-stop:hover{ background: rgba(0,0,0,0.75); }
+
+@media (prefers-reduced-motion: reduce){
+  .fete-flash, .fete-logo{ animation: none !important; background: var(--rouge) !important; }
+}
