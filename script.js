@@ -78,20 +78,25 @@ document.addEventListener('DOMContentLoaded', function () {
     var feteVideo = document.getElementById('feteVideo');
     var feteStopBtn = document.getElementById('feteStopBtn');
     var confettiLayer = document.getElementById('feteConfettiLayer');
+    var feteFlash = document.getElementById('feteFlash');
+    var feteLogo = feteOverlay.querySelector('.fete-logo');
+    var feteContent = document.getElementById('feteContent');
     var confettiItems = ['🎉', '🎊', '🥳', '✨', '🍻', '🎶', '🔥', 'LES ZIMORISTIX', '🎈'];
     var confettiInterval = null;
     var feteTimeout = null;
+    var phaseTimers = [];
     var feteRunning = false;
 
-    function spawnConfetti() {
+    function spawnConfetti(chaos) {
       var piece = document.createElement('span');
       piece.className = 'fete-piece';
       piece.textContent = confettiItems[Math.floor(Math.random() * confettiItems.length)];
-      var size = 16 + Math.random() * 26;
+      var size = 16 + Math.random() * (chaos ? 36 : 26);
       var left = Math.random() * 100;
-      var duration = 2.5 + Math.random() * 2.5;
-      var drift = (Math.random() * 220 - 110) + 'px';
-      var spin = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540) + 'deg';
+      var duration = (chaos ? 1.4 : 2.5) + Math.random() * (chaos ? 1.6 : 2.5);
+      var range = chaos ? 420 : 220;
+      var drift = (Math.random() * range - range / 2) + 'px';
+      var spin = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * (chaos ? 900 : 540)) + 'deg';
       piece.style.left = left + 'vw';
       piece.style.fontSize = size + 'px';
       piece.style.setProperty('--drift', drift);
@@ -101,15 +106,46 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(function () { piece.remove(); }, duration * 1000 + 200);
     }
 
+    function setFlash(duration, opacity) {
+      feteFlash.style.animationDuration = duration + 's';
+      feteFlash.style.opacity = opacity;
+    }
+    function setLogoSpeed(spin, pulse) {
+      feteLogo.style.animationDuration = spin + 's, ' + pulse + 's';
+    }
+    function setConfettiRate(ms, chaos) {
+      clearInterval(confettiInterval);
+      confettiInterval = setInterval(function () { spawnConfetti(chaos); }, ms);
+    }
+
     function startFete() {
       if (feteRunning) return;
       feteRunning = true;
       feteOverlay.classList.add('active');
       // Musique à partir de 1min30 (=90s)
       feteVideo.src = 'https://www.youtube.com/embed/xXT0UnNc4gI?start=90&autoplay=1&rel=0';
-      // Rafale de confettis en continu
-      confettiInterval = setInterval(spawnConfetti, 90);
-      for (var i = 0; i < 25; i++) { setTimeout(spawnConfetti, i * 40); }
+
+      // Phase 1 (0-10s) : flashs doux et lents
+      setFlash(2.6, 0.4);
+      setLogoSpeed(7, 2.6);
+      setConfettiRate(380, false);
+      for (var i = 0; i < 12; i++) { setTimeout(function () { spawnConfetti(false); }, i * 90); }
+
+      // Phase 2 (10-16s) : ça accélère
+      phaseTimers.push(setTimeout(function () {
+        setFlash(0.9, 0.7);
+        setLogoSpeed(3, 1.3);
+        setConfettiRate(140, false);
+      }, 10000));
+
+      // Phase 3 (16s+) : chaos total, ça part dans tous les sens
+      phaseTimers.push(setTimeout(function () {
+        setFlash(0.16, 0.95);
+        setLogoSpeed(1, 0.5);
+        setConfettiRate(45, true);
+        feteContent.classList.add('fete-shake');
+      }, 16000));
+
       // Arrêt automatique après 2 minutes
       feteTimeout = setTimeout(stopFete, 120000);
     }
@@ -121,7 +157,13 @@ document.addEventListener('DOMContentLoaded', function () {
       feteVideo.src = '';
       clearInterval(confettiInterval);
       clearTimeout(feteTimeout);
+      phaseTimers.forEach(clearTimeout);
+      phaseTimers = [];
       confettiLayer.innerHTML = '';
+      feteContent.classList.remove('fete-shake');
+      feteFlash.style.animationDuration = '';
+      feteFlash.style.opacity = '';
+      feteLogo.style.animationDuration = '';
     }
 
     feteBtn.addEventListener('click', startFete);
